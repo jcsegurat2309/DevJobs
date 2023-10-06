@@ -97,16 +97,7 @@ new #[Layout('layouts.guest')] class extends Component
             </label>
         </div>
 
-        <div class="flex items-center justify-between mt-4">
-            
-            <x-normal-link :href="route('register')">
-                Crear cuenta
-            </x-normal-link>
-
-            <x-normal-link :href="route('password.request')">
-                Olvidaste tu contraseña?
-            </x-normal-link>
-        </div>
+        <x-nav-auth />
         <x-primary-button class="w-full mt-5 justify-center">
             {{ __('Iniciar Sesión') }}
         </x-primary-button>
