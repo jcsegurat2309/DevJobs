@@ -12,6 +12,7 @@ new #[Layout('layouts.guest')] class extends Component
 {
     public string $name = '';
     public string $email = '';
+    public string $rol = '';
     public string $password = '';
     public string $password_confirmation = '';
 
@@ -20,6 +21,7 @@ new #[Layout('layouts.guest')] class extends Component
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
+            'rol' => ['required','numeric','between:1,2'],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -35,6 +37,7 @@ new #[Layout('layouts.guest')] class extends Component
 
 <div>
     <form wire:submit="register" novalidate>
+        
         <x-input-error :messages="$errors->all()" />
         <!-- Name -->
         <div>
@@ -46,6 +49,15 @@ new #[Layout('layouts.guest')] class extends Component
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input wire:model="email" id="email" class="block mt-1 w-full" type="email" name="email" required autocomplete="username" />
+        </div>
+        <!-- -->
+        <div class="mt-4">
+            <x-input-label for="cuenta" :value="__('que tipo de Cuenta deseas en Devjobs?')" />
+            <select wire:model="rol" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full" id="cuenta">
+                <option value="">--Selecciona un rol</option>                
+                <option value="1">Developer - Obtener Empleo</option>                
+                <option value="2">Reclutador - Publicar Empleos</option>                
+            </select>
         </div>
 
         <!-- Password -->
@@ -66,9 +78,10 @@ new #[Layout('layouts.guest')] class extends Component
                             type="password"
                             name="password_confirmation" required autocomplete="new-password" />
         </div>
+        <span wire:loading wire:target='register' class="border-white border-2 text-indigo-800 my-2 rounded-md w-full">Cargando...</span> 
         <x-nav-auth />
 
-        <x-primary-button class="mt-5 w-full justify-center uppercase">
+        <x-primary-button class="my-3 w-full justify-center uppercase">
             {{ __('Crear cuenta') }}
         </x-primary-button>
         
