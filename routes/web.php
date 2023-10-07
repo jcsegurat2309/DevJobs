@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VacantesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome');
 
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::get('/dashboard',[VacantesController::class,'index'])->name('dashboard');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
