@@ -15,12 +15,9 @@ class VacantesController extends Controller
         return view('vacantes.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        return view('vacantes.create');
     }
 
     /**

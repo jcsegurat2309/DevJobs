@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'welcome');
 
 Route::get('/dashboard',[VacantesController::class,'index'])->name('dashboard');
+Route::get('/vacantes/create',[VacantesController::class,'create'])->name('vacantes.create');
 
 Route::view('profile', 'profile')
     ->middleware(['auth'])
