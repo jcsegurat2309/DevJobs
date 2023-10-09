@@ -62,13 +62,13 @@
 
         <div class="my-5 w-80">
             <x-input-label  :value="__('Imagen Actual')" />
-            <img src="{{asset('storage/vacantes/'.$imagen)}}" alt="{{'Imagen Vacante'.$imagen}}">
+            <img src="{{asset('storage/vacantes/'.$imagen)}}" class="w-80 rounded-md" />
         </div>
         <div class="my-5 w-80">
             @if ($imagen_nueva) 
-                <div class="flex items-center justify-center my-4">
+                <div class="my-4">
                     <small>Imagen Nueva:</small>
-                    <img src="{{ $imagen_nueva->temporaryUrl() }}" class="w-3/4 rounded-md">
+                    <img src="{{ $imagen_nueva->temporaryUrl() }}" class="w-80 rounded-md" />
                 </div>
             @endif 
         </div>

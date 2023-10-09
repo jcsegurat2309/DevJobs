@@ -8,6 +8,7 @@ use Livewire\Component;
 use App\Models\Categoria;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Rule; 
+use Illuminate\Support\Facades\Storage;
 
 
 class EditarVacante extends Component
@@ -54,8 +55,12 @@ class EditarVacante extends Component
 
         //comprobación img nueva
         if($this->imagen_nueva){
+
+            //Elimino la img anterior
+            Storage::delete('public/vacantes/'.$this->imagen);
+            
             $imagen = $this->imagen_nueva->store('public/vacantes');
-            $datos['imagen'] = str_replace('/public/vacantes/','',$imagen);
+            $datos['imagen'] = str_replace('public/vacantes/','',$imagen);
         }
 
         //Actualización de datos
