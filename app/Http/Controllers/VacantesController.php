@@ -34,6 +34,7 @@ class VacantesController extends Controller
      */
     public function show(Vacante $vacante)
     {
+        $this->authorize('update', $vacante);
         return view('vacantes.show', compact('vacante'));
     }
 

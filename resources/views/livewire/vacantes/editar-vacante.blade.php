@@ -1,4 +1,4 @@
-<form class="md:w-1/2 space-y-5" wire:submit="crearVacante">
+<form class="md:w-1/2 space-y-5" wire:submit="guardarVacante">
     <div>
         <x-input-label for="titulo" :value="__('Titulo Vacante')" />
         <x-text-input id="titulo" class="block mt-1 w-full" type="text" wire:model="titulo" :value="old('titulo')" autofocus placeholder="Titulo vacante"/>    
@@ -52,21 +52,25 @@
         @enderror
     </div>
     <div>    
-        {{-- @if ($imagen) 
-            <div class="flex items-center justify-center my-4">
-                <img src="{{ $imagen->temporaryUrl() }}" class="w-3/4 rounded-md">
-            </div>
-        @endif --}}
+        
          <x-input-label for="imagen" :value="__('Imagen')" />
         
-        <x-text-input id="imagen" class="block mt-1 w-full" type="file" wire:model="imagen"  accept="image/*"/>
-        @error('imagen')
+        <x-text-input id="imagen" class="block mt-1 w-full" type="file" wire:model="imagen_nueva"  accept="image/*"/>
+        @error('imagen_nueva')
             <livewire:vacantes.mostrar-alerta :message="$message" />
         @enderror
 
         <div class="my-5 w-80">
             <x-input-label  :value="__('Imagen Actual')" />
-            <img src="{{asset('storage/vacantes/'.$imagen)}}" alt="{{'Imagen Vacante'.$imagen}}"
+            <img src="{{asset('storage/vacantes/'.$imagen)}}" alt="{{'Imagen Vacante'.$imagen}}">
+        </div>
+        <div class="my-5 w-80">
+            @if ($imagen_nueva) 
+                <div class="flex items-center justify-center my-4">
+                    <small>Imagen Nueva:</small>
+                    <img src="{{ $imagen_nueva->temporaryUrl() }}" class="w-3/4 rounded-md">
+                </div>
+            @endif 
         </div>
     </div>
     <x-primary-button class="w-full mt-5 justify-center" wire:loading.attr="disabled" wire:loading.class="opacity-70">
