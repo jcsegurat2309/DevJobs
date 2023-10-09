@@ -6,7 +6,7 @@ use App\Models\Salario;
 
 use Livewire\Component;
 use App\Models\Categoria;
-use App\Models\Vacantes;
+use App\Models\Vacante;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Rule; 
 
@@ -48,7 +48,7 @@ class CrearVacantes extends Component
         $nombre_Imagen = str_replace('public/vacantes/','',$imagen);
         
         //Crear registro
-        Vacantes::create([
+        Vacante::create([
             'titulo' => $this->titulo,
             'salario_id' => $this->salario,
             'categoria_id' => $this->categoria,
