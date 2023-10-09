@@ -14,10 +14,13 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::factory()->create([
+             'name' => 'Juan Carlos Segura Torres',
+             'email' => 'jcsegurat@gmail.com',
+             'password' => bcrypt('jcsegurat230999#'),
+             'rol' => 2
+         ]);
+         
         $this->call(SalarioSeeder::class);
         $this->call(CategoriaSeeder::class);
     }

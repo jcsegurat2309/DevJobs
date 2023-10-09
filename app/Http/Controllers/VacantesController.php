@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vacantes;
 use Illuminate\Http\Request;
 
 class VacantesController extends Controller
@@ -12,7 +13,8 @@ class VacantesController extends Controller
     }
     public function index()
     {
-        return view('vacantes.index');
+        $vacantes = Vacantes::where('user_id',auth()->user()->id)->paginate(5);
+        return view('vacantes.index', compact('vacantes'));
     }
 
     public function create()
