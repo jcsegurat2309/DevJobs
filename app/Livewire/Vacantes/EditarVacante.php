@@ -73,8 +73,8 @@ class EditarVacante extends Component
         $vacante->descripcion = $datos['descripcion'];
         $vacante->imagen = $datos['imagen'] ?? $vacante->imagen;
         $vacante->save();
-        //Redirecionamiento con mensaje flash
-        session()->flash('mensaje','La vacante se actualizo correctamente.'); 
+        
+        $this->dispatch('mensaje','La vacante se actualizco correctamente');
         return redirect()->route('dashboard');
     }
 

@@ -76,5 +76,20 @@
     <x-primary-button class="w-full mt-5 justify-center" wire:loading.attr="disabled" wire:loading.class="opacity-70">
         {{ __('Actualizar Vacante') }}
     </x-primary-button>
+    @push('js')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>       
+            document.addEventListener('livewire:initialized', () => {
+                @this.on('mensaje', (event) => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Cambio realizaco con exito!',
+                        text: 'Se actualizo el post correctamente!',
+                    });
+                });
+            });
+            
+        </script>
+    @endpush
 </form>
 

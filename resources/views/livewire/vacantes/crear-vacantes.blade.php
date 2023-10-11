@@ -70,3 +70,17 @@
         {{ __('Crear Vacante') }}
     </x-primary-button>
 </form>
+@push('js')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>       
+        document.addEventListener('livewire:initialized', () => {
+            @this.on('mensaje', (event) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: event,
+                    text: 'Se creo y se publico la vacante con exito.',
+                });
+            });
+        });
+    </script>
+@endpush

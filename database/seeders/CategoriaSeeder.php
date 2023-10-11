@@ -22,7 +22,12 @@ class CategoriaSeeder extends Seeder
         ]);
 
         DB::table('categorias')->insert([
-            'categoria' => 'Front end Developer',
+            'categoria' => 'Frontend Developer',
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s'),
+        ]);
+        DB::table('categorias')->insert([
+            'categoria' => 'FullStack Developer',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);

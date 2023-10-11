@@ -2,8 +2,10 @@
 
 namespace App\Livewire\Vacantes;
 
-use Livewire\Component;
 use App\Models\Vacante;
+use Livewire\Component;
+use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Storage;
 
 class MostrarVacantes extends Component
 {
@@ -11,5 +13,12 @@ class MostrarVacantes extends Component
     {
         $vacantes = Vacante::where('user_id',auth()->user()->id)->paginate(10);
         return view('livewire.vacantes.mostrar-vacantes', compact('vacantes'));
+    }
+    #[On('delete')] 
+    public function delete(Vacante $id){
+        
+        Storage::delete('public/vacantes/'.$id->imagen);
+        $id->delete();
+        /* return redirect()->route('dashboard'); */
     }
 }
