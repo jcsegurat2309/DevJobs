@@ -7,15 +7,6 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if (session()->has('mensaje'))
-                <div class="flex justify-between uppercase border border-green-600 bg-green-100 text-green-600 font-bold p-2 my-3" x-data="{ open: true}" x-show="open" x-transition>
-                    {{session('mensaje')}}
-                    
-                    <button x-on:click="open = ! open" class="px-2 py-1 bg-green-400 border border-white text-white rounded-lg">
-                        X
-                    </button>
-                </div>
-            @endif 
             <livewire:vacantes.mostrar-vacantes />
         </div>
     </div>
