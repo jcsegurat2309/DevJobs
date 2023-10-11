@@ -18,7 +18,8 @@ Route::view('/', 'welcome');
 
 Route::get('/dashboard',[VacantesController::class,'index'])->name('dashboard');
 Route::get('/vacantes/create',[VacantesController::class,'create'])->name('vacantes.create');
-Route::get('/vacantes/{vacante}/edit',[VacantesController::class,'show'])->name('vacantes.show');
+Route::get('/vacantes/{vacante}/edit',[VacantesController::class,'edit'])->name('vacantes.edit');
+Route::get('/vacantes/{vacante}',[VacantesController::class,'show'])->name('vacantes.show');
 
 Route::view('profile', 'profile')->middleware(['auth'])->name('profile');
 
