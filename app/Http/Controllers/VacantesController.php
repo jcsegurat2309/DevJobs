@@ -7,17 +7,15 @@ use Illuminate\Http\Request;
 
 class VacantesController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware(['auth','verified']);
-    }
     public function index()
     {
+        $this->authorize('viewAny',Vacante::class);
         return view('vacantes.index');
     }
 
     public function create()
     {
+        $this->authorize('create',Vacante::class);
         return view('vacantes.create');
     }
 

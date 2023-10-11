@@ -88,7 +88,9 @@ new #[Layout('layouts.guest')] class extends Component
             <x-input-label for="password" :value="__('Password')" />
             <x-text-input wire:model="password" id="password" class="block mt-1 w-full" type="password" name="password" autocomplete="current-password" />           
         </div>
-
+        <div wire:loading>
+            <span class="text-sm text-gray-700">Cargando...</span>
+        </div>
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember" class="inline-flex items-center">
