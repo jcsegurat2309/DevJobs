@@ -10,7 +10,7 @@
             <div class="mb-4">
                 <x-input-label for="cv" :value="__('Curriculum o hoja de vida')"></x-input-label>
                 <input type="file" id="cv" accept=".pdf" class="block mt-1 w-full" wire:model="cv"/>
-                <small wire:loading wire:target="cv">Cargando...</small>
+                <small wire:loading wire:target="cv" wire:target="postularme">Cargando...</small>
             </div>
 
             @error('cv')
