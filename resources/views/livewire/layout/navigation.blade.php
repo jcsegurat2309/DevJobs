@@ -79,6 +79,11 @@ new class extends Component
                     @endforeach
                 @endguest
                 @auth
+                    @if (auth()->user()->rol === 2)
+                        <a class="mr-2 w-7 h-7 bg-indigo-600 hover:bg-indigo-800 rounded-full flex flex-col justify-center items-center text-sm font-extrabold text-white" href="{{route('notificaciones')}}">
+                            {{auth()->user()->unreadNotifications->count()}}
+                        </a>
+                    @endif
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
@@ -139,6 +144,12 @@ new class extends Component
                     {{ __($enlace['nombre']) }}
                 </x-responsive-nav-link>
                 @endforeach
+                @if (auth()->user()->rol === 2)
+                    <x-responsive-nav-link :href="route('notificaciones')" :active="false" wire:navigate>
+                        @choice('Notificacion|Notificaciones', auth()->user()->unreadNotifications->count())
+                         <span class="bg-indigo-500 px-1 text-white font-bold">{{auth()->user()->unreadNotifications->count()}}</span>
+                    </x-responsive-nav-link>
+                @endif
             </div>
 
             <!-- Responsive Settings Options -->
