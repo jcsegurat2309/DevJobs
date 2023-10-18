@@ -15,9 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome');
+Route::view('/', 'welcome')->name('home');
 
-Route::get('/dashboard',[VacantesController::class,'index'])->name('dashboard');
+Route::get('/dashboard',[VacantesController::class,'index'])->middleware(['auth','rol.reclutador','verified'])->name('dashboard');
 Route::get('/vacantes/create',[VacantesController::class,'create'])->name('vacantes.create');
 Route::get('/vacantes/{vacante}/edit',[VacantesController::class,'edit'])->name('vacantes.edit');
 Route::get('/vacantes/{vacante}',[VacantesController::class,'show'])->name('vacantes.show');

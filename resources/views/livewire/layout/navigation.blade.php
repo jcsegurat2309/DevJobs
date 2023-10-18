@@ -29,27 +29,29 @@ new class extends Component
 
                 <!-- Navigación de usuario autentificado-->
                 @auth
-                    @php
-                        $enlaces = [
-                            [
-                                'nombre'=> 'Mis vacantes',
-                                'ruta' => route('dashboard'),
-                                'estado' => request()->routeIs('dashboard'),
-                            ],
-                            [
-                                'nombre' => 'Crear Vacante',
-                                'ruta' => route('vacantes.create'),
-                                'estado'=> request()->routeIs('vacantes.create'),
-                            ],
-                        ];
-                    @endphp
-                    @foreach ($enlaces as $enlace)
-                        <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                            <x-nav-link :href="$enlace['ruta']" :active="$enlace['estado']" wire:navigate>
-                                {{ __($enlace['nombre']) }}
-                            </x-nav-link>
-                        </div>
-                    @endforeach
+                    @can('create', App\Models\Vacante::class)
+                        @php
+                            $enlaces = [
+                                [
+                                    'nombre'=> 'Mis vacantes',
+                                    'ruta' => route('dashboard'),
+                                    'estado' => request()->routeIs('dashboard'),
+                                ],
+                                [
+                                    'nombre' => 'Crear Vacante',
+                                    'ruta' => route('vacantes.create'),
+                                    'estado'=> request()->routeIs('vacantes.create'),
+                                ],
+                            ];
+                        @endphp
+                        @foreach ($enlaces as $enlace)
+                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                                <x-nav-link :href="$enlace['ruta']" :active="$enlace['estado']" wire:navigate>
+                                    {{ __($enlace['nombre']) }}
+                                </x-nav-link>
+                            </div>
+                        @endforeach
+                    @endcan
                 @endauth
                
             </div>
@@ -79,11 +81,11 @@ new class extends Component
                     @endforeach
                 @endguest
                 @auth
-                    @if (auth()->user()->rol === 2)
+                    @can('create', App\Models\Vacante::class)
                         <a class="mr-2 w-7 h-7 bg-indigo-600 hover:bg-indigo-800 rounded-full flex flex-col justify-center items-center text-sm font-extrabold text-white" href="{{route('notificaciones')}}">
                             {{auth()->user()->unreadNotifications->count()}}
                         </a>
-                    @endif
+                    @endcan
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             <button
@@ -138,19 +140,21 @@ new class extends Component
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         @auth
-            <div class="pt-2 pb-3 space-y-1">
-                @foreach ($enlaces as $enlace)
-                <x-responsive-nav-link :href="$enlace['ruta']" :active="$enlace['estado']" wire:navigate>
-                    {{ __($enlace['nombre']) }}
-                </x-responsive-nav-link>
-                @endforeach
-                @if (auth()->user()->rol === 2)
+            @can('create', App\Models\Vacante::class)
+                <div class="pt-2 pb-3 space-y-1">
+                    @foreach ($enlaces as $enlace)
+                        <x-responsive-nav-link :href="$enlace['ruta']" :active="$enlace['estado']" wire:navigate>
+                            {{ __($enlace['nombre']) }}
+                        </x-responsive-nav-link>
+                    @endforeach
+                    
                     <x-responsive-nav-link :href="route('notificaciones')" :active="false" wire:navigate>
                         @choice('Notificacion|Notificaciones', auth()->user()->unreadNotifications->count())
-                         <span class="bg-indigo-500 px-1 text-white font-bold">{{auth()->user()->unreadNotifications->count()}}</span>
+                        <span class="bg-indigo-500 px-1 text-white font-bold">{{auth()->user()->unreadNotifications->count()}}</span>
                     </x-responsive-nav-link>
-                @endif
-            </div>
+                    
+                </div>
+            @endcan
 
             <!-- Responsive Settings Options -->
             <div class="pt-4 pb-1 border-t border-gray-200">
