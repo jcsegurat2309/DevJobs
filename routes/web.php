@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CandidatoController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NotificacionController;
 use App\Http\Controllers\VacantesController;
 use Illuminate\Support\Facades\Route;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome')->name('home');
+Route::get('/', HomeController::class)->name('home');
 
 Route::get('/dashboard',[VacantesController::class,'index'])->middleware(['auth','rol.reclutador','verified'])->name('dashboard');
 Route::get('/vacantes/create',[VacantesController::class,'create'])->name('vacantes.create');
